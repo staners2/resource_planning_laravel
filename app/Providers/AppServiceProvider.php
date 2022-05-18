@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Actions\GitAction;
+use App\Actions\ResourceAction;
+use App\Contracts\ResourceContract;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
     }
 
     /**

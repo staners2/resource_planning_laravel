@@ -7,18 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class CreatedProduct extends Mailable
+class CreatedProductMail extends Mailable
 {
     use Queueable, SerializesModels;
+
+    private $article;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($article)
     {
-        //
+        $this->article = $article;
     }
 
     /**
@@ -28,6 +30,8 @@ class CreatedProduct extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->text('notify.created_product',[
+            'article' => "$this->article"
+        ]);
     }
 }
