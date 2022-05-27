@@ -18,8 +18,6 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 class ProductController extends Controller
 {
     public function index(Request $request): JsonResponse {
-        $products = Product::all();
-
         $response=Gate::inspect('viewAny', Product::class);
         if ($response->allowed()) {
             return response()->json(ProductResource::collection(Cache::get('products')))
@@ -41,8 +39,8 @@ class ProductController extends Controller
         $product = new Product(['name' => $name, 'article' => $article, 'data' => $data]);
         $product->save();
 
-        $email = auth()->user()->email;
-        NotifyCreatedProductJob::dispatch($product->article, $email);
+//        $email = auth()->user()->email;
+//        NotifyCreatedProductJob::dispatch($product->article, $email);
 
         Cache::forget('products');
 

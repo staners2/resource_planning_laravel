@@ -15,7 +15,8 @@ class ProductObserver
      */
     public function created(Product $product)
     {
-
+        $email = auth()->user()->email;
+        NotifyCreatedProductJob::dispatch($product->article, $email);
     }
 
     /**
@@ -37,8 +38,7 @@ class ProductObserver
      */
     public function deleted(Product $product)
     {
-        $email = auth()->user()->email;
-        NotifyCreatedProductJob::dispatch($product->article, $email);
+
     }
 
     /**
